@@ -110,8 +110,36 @@ Window {
 }
 ```
 
+
 As usual, you need a `roscore` running on your system.
 
+If You wan use Subcriber Function In Qml Mofied or add
+Like This
+
+```qml
+import QtQuick 2.12
+import QtQuick.Window 2.12
+
+import Ros 1.0
+
+Window {
+    visible: true
+    width: 640
+    height: 480
+    title: qsTr("Hello World")
+
+    RosStringSubscriber{
+        id: hello_subscriber
+        topic: "hello"
+
+    }
+
+    Text{
+      text: hello_subscriber.text 
+    }
+
+}
+```
 
 Supported ROS features
 ----------------------
