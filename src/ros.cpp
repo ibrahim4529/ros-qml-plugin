@@ -171,6 +171,47 @@ void RosStringPublisher::publish(){
     _publisher.publish(message);
 }
 
+//////////////////////////////////////// Ros Float ///////////////////////
+void RosFloatSubscriber::onIncomingString(const std_msgs::Float32 &data)
+{
+    _text = QString::number(data.data);
+    emit onTextChanged();
+}
+
+void RosFloatSubscriber::setTopic(QString topic)
+{
+    _incoming_message= _node.subscribe(topic.toStdString(), 1, &RosFloatSubscriber::onIncomingString ,this);
+    _topic = topic;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+// void RosStringPublisher::setTopic(QString topic)
+// {
+//     _publisher = _node.advertise<std_msgs::String>(topic.toStdString(), 1);
+//     _topic = topic;
+// }
+
+// void RosStringPublisher::setText(QString text)
+// {
+//     _text = text;
+//     publish();
+// }
+
+// void RosStringPublisher::publish(){
+//     if(_publisher.getTopic().empty()) {
+//         cerr << "RosSignal.signal() called without any topic." << endl;
+//         return;
+//     }
+
+//     std_msgs::String message;
+//     message.data = _text.toStdString();
+
+//     _publisher.publish(message);
+// }
+
+
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
